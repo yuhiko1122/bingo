@@ -1,0 +1,95 @@
+/* CSSリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 400px; /* 履歴の幅に合わせてコンテナの位置を調整 */
+}
+
+#history {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 350px; /* 枠の幅を2倍に（400pxに） */
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+#history h2 {
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+    position: sticky;
+    top: 0;
+    background-color: #f4f4f4;
+}
+
+#history-content {
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.history-line {
+    margin: 5px 0;
+}
+
+.history-item {
+    font-weight: bold;
+    display: inline-block;
+    width: 4em; /* 幅はそのまま */
+    text-align: center;
+}
+
+#number {
+    font-family: "Spicy Rice", serif;
+  font-weight: 400;
+  font-style: normal;
+    font-size: 16em; /* サイズを8倍に設定（元のサイズが2emだった場合） */
+    margin: 20px;
+    color: #333; /* 文字色を追加 */
+}
+
+button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    font-family: "RocknRoll One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* #number 要素の影のアニメーション */
+@keyframes fadeOutAnimation {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+#number.fade-out {
+    animation: fadeOutAnimation 1s forwards; /* 1秒でアニメーション完了 */
+}
+
