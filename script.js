@@ -26,7 +26,7 @@ function generateRandomNumber() {
     setTimeout(() => {
         // 数字が全て表示された場合はリセット
         if (shuffledNumbers.length === 0) {
-            document.getElementById('number').textContent = "すべての数字が表示されました。";
+            document.getElementById('number').textContent = "Fin.";
             numberElement.classList.remove('fade-out');
             return;
         }
