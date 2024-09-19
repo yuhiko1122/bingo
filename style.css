@@ -81,10 +81,9 @@ button {
   border-radius: 50px; /* 角を丸くする */
 }
 
-button:hover{
-    background-color: red;
-    color: white;
-}
+
+
+
 
 /* #number 要素の影のアニメーション */
 @keyframes fadeOutAnimation {

@@ -6,11 +6,11 @@
     <title>ランダム数字生成器</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="history">
@@ -23,11 +23,13 @@
     <div class="container">
         <h1>2024 ビンゴ大会！！</h1>
         <div id="number">???</div>
-        <button onclick="generateRandomNumber()">スタート！！</button>
+        <button id="start-btn" onclick="startRoll()">スタート！！</button>
+        <button id="stop-btn" onclick="stopRoll()" style="display: none;">ストップ！！</button>
     </div>
 
-    <!-- ドラムロールの音声ファイル -->
-    <audio id="drum-roll" src="SE114.mp3" preload="auto"></audio>
+    <!-- ドラムロールとシンバルの音声ファイル -->
+    <audio id="drum-roll" src="mp3/se_drumroll02.mp3" preload="auto"></audio>
+    <audio id="cymbal-sound" src="mp3/maou_se_inst_drum2_cymbal.mp3" preload="auto"></audio> <!-- シンバルの音声ファイルを追加 -->
 
     <script src="script.js"></script>
 </body>
