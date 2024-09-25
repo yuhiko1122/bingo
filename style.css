@@ -9,8 +9,21 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    background-color: yellow;
+    background-color: navy; /* 背景色を紺色に */
+    color: white; /* 文字を白色に */
 }
+
+#number {
+    font-family: "Spicy Rice", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16em;
+    margin: 20px;
+    color: white; /* 数字の色を白に */
+}
+
+
+
 
 .container {
     padding: 30px;
@@ -44,12 +57,14 @@ body {
     position: sticky;
     top: 0;
     background-color: #f4f4f4;
+    color:black
 }
 
 #history-content {
     max-height: calc(100vh - 50px);
     overflow-y: auto;
     margin-top: 10px;
+    color: black;
 }
 
 .history-line {
@@ -59,18 +74,13 @@ body {
 .history-item {
     font-weight: bold;
     display: inline-block;
-    width: 4em; /* 幅はそのまま */
+    width: 3em; /* 幅はそのまま */
     text-align: center;
+    font-size: 1.3em; /* 数字のサイズを倍に */
 }
 
-#number {
-    font-family: "Spicy Rice", serif;
-  font-weight: 400;
-  font-style: normal;
-    font-size: 16em; /* サイズを8倍に設定（元のサイズが2emだった場合） */
-    margin: 20px;
-    color: #333; /* 文字色を追加 */
-}
+
+
 
 button {
     font-size: 1.2em;

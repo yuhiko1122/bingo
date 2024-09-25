@@ -5,6 +5,7 @@ let shuffledNumbers = shuffle(numbers);
 let history = [];
 let drumRollInterval;
 let numberAnimationInterval;
+let isRolling = false; // ロール状態を管理するフラグ
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -16,6 +17,9 @@ function shuffle(array) {
 
 // ドラムロールを再生し、ランダム数字のアニメーションを開始する関数
 function startRoll() {
+    if (isRolling) return; // 既にロール中なら何もしない
+    isRolling = true; // ロール開始
+
     const drumRoll = document.getElementById('drum-roll');
     drumRoll.currentTime = 0;
     drumRoll.play();
@@ -26,69 +30,55 @@ function startRoll() {
         drumRoll.play();
     }, drumRoll.duration * 1000); // 音声の再生時間に基づいてループ
 
-    // 1秒ごとにランダムな数字を表示するアニメーション
+    // 0.05秒ごとにランダムな数字を表示するアニメーション
     numberAnimationInterval = setInterval(() => {
         const randomNumber = Math.floor(Math.random() * 75) + 1; // 1から75までのランダムな数字
         document.getElementById('number').textContent = randomNumber;
-    }, 50); // 1秒ごとにランダムな数字を表示
-
-    // ボタンの表示を切り替える
-    document.getElementById('start-btn').style.display = 'none';
-    document.getElementById('stop-btn').style.display = 'block';
+    }, 50); // 50ミリ秒ごとにランダムな数字を表示
 }
 
 // ドラムロールを停止し、アニメーションを止めて、シンバルを鳴らし、最終的な数字を表示する関数
 function stopRoll() {
+    if (!isRolling) return; // ロール中でなければ何もしない
+    isRolling = false; // ロール終了
+
     const drumRoll = document.getElementById('drum-roll');
     drumRoll.pause();
     clearInterval(drumRollInterval); // ループ停止
     clearInterval(numberAnimationInterval); // アニメーションを停止
 
-    // 0.4秒後にシンバルの音を再生
-    setTimeout(() => {
-        const cymbalSound = document.getElementById('cymbal-sound');
-        cymbalSound.currentTime = 0;
-        cymbalSound.play();
-    }, 300); // 500ミリ秒（0.5秒）
-
     // #number 要素を即座に非表示にする
     const numberElement = document.getElementById('number');
     numberElement.style.opacity = '0';
 
+    // 0.5秒後にシンバルの音を再生
+    setTimeout(() => {
+        const cymbalSound = document.getElementById('cymbal-sound');
+        cymbalSound.currentTime = 0;
+        cymbalSound.play();
+    }, 500); // 500ミリ秒（0.5秒）
+
     // 0.5秒後に数字を再表示するための処理
     setTimeout(() => {
         numberElement.style.opacity = '1';
+        generateRandomNumber(); // 最終的な数字を表示
     }, 500); // 500ミリ秒（0.5秒）
-
-    // 最終的な数字を表示
-    generateRandomNumber();
-
-    // ボタンの表示を切り替える
-    document.getElementById('start-btn').style.display = 'block';
-    document.getElementById('stop-btn').style.display = 'none';
 }
 
 function generateRandomNumber() {
-    // #number 要素を非表示にして影のようなアニメーションを追加
-    
+    // 数字が全て表示された場合はリセット
+    if (shuffledNumbers.length === 0) {
+        document.getElementById('number').textContent = "Fin.";
+        return;
+    }
 
-    setTimeout(() => {
-        // 数字が全て表示された場合はリセット
-        if (shuffledNumbers.length === 0) {
-            document.getElementById('number').textContent = "Fin.";
-            numberElement.classList.remove('fade-out');
-            return;
-        }
+    // 次の数字を取り出して表示
+    const nextNumber = shuffledNumbers.pop();
+    document.getElementById('number').textContent = nextNumber;
 
-        // 次の数字を取り出して表示
-        const nextNumber = shuffledNumbers.pop();
-        document.getElementById('number').textContent = nextNumber;
-
-        // 履歴に追加し、履歴を更新
-        history.push(nextNumber);
-        updateHistory();
-        numberElement.classList.remove('fade-out');
-    }, 500); // アニメーション時間
+    // 履歴に追加し、履歴を更新
+    history.push(nextNumber);
+    updateHistory();
 }
 
 function updateHistory() {
@@ -109,3 +99,14 @@ function updateHistory() {
         historyContainer.innerHTML += `<div class="history-line">${line}</div>`; // 残りの数字を追加
     }
 }
+
+// キーボードのEnterキーでスタートとストップを制御
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        if (isRolling) {
+            stopRoll(); // ロール中ならストップ
+        } else {
+            startRoll(); // ロールしていなければスタート
+        }
+    }
+});
