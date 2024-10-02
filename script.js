@@ -15,6 +15,8 @@ function shuffle(array) {
     return array;
 }
 
+
+
 // ドラムロールを再生し、ランダム数字のアニメーションを開始する関数
 function startRoll() {
     if (isRolling) return; // 既にロール中なら何もしない
@@ -110,3 +112,19 @@ document.addEventListener('keydown', (event) => {
         }
     }
 });
+// Spaceキーが押されたら全画面表示にする処理
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {  // Spaceキーのコードを検出
+        enterFullScreen();
+    }
+});
+
+// 全画面表示にする関数
+function enterFullScreen() {
+    if (!document.fullscreenElement) {
+        // 全画面表示にする
+        document.documentElement.requestFullscreen().catch(err => {
+            console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
+    }
+}

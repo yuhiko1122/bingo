@@ -17,9 +17,10 @@ body {
     font-family: "Spicy Rice", serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 16em;
+    font-size: 20em;
     margin: 20px;
     color: white; /* 数字の色を白に */
+    margin-top: 100px; /* 少し下に移動させる */
 }
 
 
