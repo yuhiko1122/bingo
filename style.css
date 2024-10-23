@@ -9,8 +9,8 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    background-color: navy; /* 背景色を紺色に */
-    color: white; /* 文字を白色に */
+    background-color: #c7ffa3; /* 背景色を紺色に */
+    color: black; /* 文字を白色に */
 }
 
 #number {
@@ -19,7 +19,7 @@ body {
     font-style: normal;
     font-size: 25em;
     margin: 20px;
-    color: white; /* 数字の色を白に */
+    color: black; /* 数字の色を白に */
     margin-top: -10px; /* 少し下に移動させる */
 }
 
