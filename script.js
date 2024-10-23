@@ -6,6 +6,7 @@ let history = [];
 let drumRollInterval;
 let numberAnimationInterval;
 let isRolling = false; // ロール状態を管理するフラグ
+let volume = 1.0; // 初期音量
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -15,8 +16,6 @@ function shuffle(array) {
     return array;
 }
 
-
-
 // ドラムロールを再生し、ランダム数字のアニメーションを開始する関数
 function startRoll() {
     if (isRolling) return; // 既にロール中なら何もしない
@@ -24,6 +23,7 @@ function startRoll() {
 
     const drumRoll = document.getElementById('drum-roll');
     drumRoll.currentTime = 0;
+    drumRoll.volume = volume; // 音量を設定
     drumRoll.play();
 
     // ドラムロールをループ再生
@@ -57,6 +57,7 @@ function stopRoll() {
     setTimeout(() => {
         const cymbalSound = document.getElementById('cymbal-sound');
         cymbalSound.currentTime = 0;
+        cymbalSound.volume = volume; // 音量を設定
         cymbalSound.play();
     }, 500); // 500ミリ秒（0.5秒）
 
@@ -112,10 +113,31 @@ document.addEventListener('keydown', (event) => {
         }
     }
 });
+
 // Spaceキーが押されたら全画面表示にする処理
 document.addEventListener('keydown', (event) => {
     if (event.code === 'Space') {  // Spaceキーのコードを検出
         enterFullScreen();
+    }
+});
+
+// 音量調整（1キーで音量アップ、2キーで音量ダウン）
+document.addEventListener('keydown', (event) => {
+    const drumRoll = document.getElementById('drum-roll');
+    const cymbalSound = document.getElementById('cymbal-sound');
+    
+    if (event.key === '1') {
+        // 音量を上げる（最大1.0）
+        volume = Math.min(volume + 0.1, 1.0);
+        drumRoll.volume = volume;
+        cymbalSound.volume = volume;
+        console.log(`Volume increased to: ${volume}`);
+    } else if (event.key === '2') {
+        // 音量を下げる（最小0.0）
+        volume = Math.max(volume - 0.1, 0.0);
+        drumRoll.volume = volume;
+        cymbalSound.volume = volume;
+        console.log(`Volume decreased to: ${volume}`);
     }
 });
 
